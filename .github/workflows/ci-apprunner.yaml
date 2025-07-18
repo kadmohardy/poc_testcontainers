@@ -38,13 +38,16 @@ jobs:
       - name: Check Docker version
         run: docker version
       
-      - name: Create custom Docker network
-        run: docker network create test-network || true
+      # - name: Create custom Docker network
+      #   run: docker network create test-network || true
 
       - name: Running tests with coverage
-        run: go test -coverprofile=coverage.out ./... 
+        run: go test -coverprofile=coverage.out ./... -v
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
+
+      - name: Docker containers list
+        run: docker ps
 
       - name: Cleanup DynamoDB local containers
         if: always()
