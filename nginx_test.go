@@ -1,9 +1,10 @@
-package nginx
+package poc_testcontainers_test
 
 import (
 	"context"
 	"fmt"
 	"net/http"
+	"poc_testcontainers"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -18,7 +19,7 @@ func TestIntegrationNginxLatestReturn(t *testing.T) {
 
 	ctx := context.Background()
 
-	nginxC, err := startContainer(ctx)
+	nginxC, err := poc_testcontainers.StartContainer(ctx)
 	testcontainers.CleanupContainer(t, nginxC)
 	require.NoError(t, err)
 	print("____________________________")
